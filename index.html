@@ -1,0 +1,926 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1020">
+
+  <title>Skills Portal | The27LINKS</title>
+  <meta name="description" content="Learn practical digital skills with The27LINKS Skills Portal. Explore online courses, build your knowledge and earn certificates.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://skills.the27links.in/">
+
+  <style>
+    :root {
+      --bg: #0b1020;
+      --panel: #131b2e;
+      --panel-light: #19243a;
+      --border: #2a3854;
+      --text: #edf3ff;
+      --muted: #a9b6ce;
+      --accent: #71e0c0;
+      --accent-dark: #102d2a;
+      --blue: #86a9ff;
+      --radius: 20px;
+      --max: 1160px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system,
+                   BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    button { font: inherit; }
+
+    .container {
+      width: min(var(--max), calc(100% - 40px));
+      margin-inline: auto;
+    }
+
+    .topbar {
+      border-bottom: 1px solid var(--border);
+      background: rgba(11, 16, 32, .88);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(16px);
+    }
+
+    .nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 19px;
+      font-weight: 800;
+      letter-spacing: -.6px;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: var(--accent);
+      color: #071b19;
+      font-weight: 900;
+      font-size: 17px;
+    }
+
+    .brand small {
+      display: block;
+      color: var(--muted);
+      font-size: 10px;
+      letter-spacing: 2px;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 12px 19px;
+      border: 1px solid transparent;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 750;
+      cursor: pointer;
+      transition: transform .2s, background .2s, border-color .2s;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #071b19;
+    }
+
+    .btn-primary:hover { background: #91f0d5; }
+
+    .btn-secondary {
+      background: transparent;
+      border-color: var(--border);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover { border-color: var(--accent); }
+
+    .menu-toggle {
+      display: none;
+      color: var(--text);
+      border: 1px solid var(--border);
+      background: var(--panel);
+      border-radius: 10px;
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+
+    .hero {
+      padding: 94px 0 78px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      right: -200px;
+      top: -160px;
+      background: radial-gradient(circle, rgba(113,224,192,.12), transparent 68%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 65px;
+      align-items: center;
+      position: relative;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 7px 12px;
+      border: 1px solid #31534f;
+      border-radius: 999px;
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 750;
+      letter-spacing: .4px;
+      background: rgba(113,224,192,.06);
+    }
+
+    .eyebrow span {
+      width: 7px;
+      height: 7px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      font-size: clamp(42px, 5.4vw, 68px);
+      letter-spacing: -3px;
+      line-height: 1.08;
+      margin: 25px 0;
+      max-width: 700px;
+    }
+
+    .gradient-text {
+      color: var(--accent);
+    }
+
+    .hero-copy {
+      color: var(--muted);
+      font-size: 17px;
+      max-width: 560px;
+      margin-bottom: 29px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .hero-note {
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .learning-card {
+      padding: 25px;
+      background: linear-gradient(145deg, #17243b, #10192b);
+      border: 1px solid var(--border);
+      border-radius: 25px;
+      box-shadow: 0 30px 80px rgba(0,0,0,.2);
+      transform: rotate(1deg);
+    }
+
+    .learning-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+
+    .small-label {
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1.4px;
+      font-weight: 800;
+    }
+
+    .status {
+      font-size: 11px;
+      color: var(--accent);
+      background: rgba(113,224,192,.1);
+      padding: 6px 9px;
+      border-radius: 8px;
+    }
+
+    .preview-icon {
+      width: 62px;
+      height: 62px;
+      display: grid;
+      place-items: center;
+      font-size: 29px;
+      background: #203a4b;
+      border: 1px solid #355768;
+      border-radius: 17px;
+      margin-bottom: 19px;
+    }
+
+    .learning-card h3 { font-size: 23px; margin-bottom: 7px; }
+    .learning-card p { color: var(--muted); font-size: 13px; }
+
+    .progress-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--muted);
+      margin: 22px 0 9px;
+    }
+
+    .progress {
+      height: 7px;
+      border-radius: 20px;
+      background: #29364e;
+      overflow: hidden;
+    }
+
+    .progress span {
+      display: block;
+      width: 72%;
+      height: 100%;
+      background: var(--accent);
+      border-radius: inherit;
+    }
+
+    .mini-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 25px;
+    }
+
+    .mini-stat {
+      background: rgba(255,255,255,.035);
+      border: 1px solid var(--border);
+      padding: 12px 8px;
+      text-align: center;
+      border-radius: 12px;
+    }
+
+    .mini-stat strong { display: block; font-size: 18px; }
+    .mini-stat small { color: var(--muted); font-size: 10px; }
+
+    section { padding: 78px 0; }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 25px;
+      margin-bottom: 30px;
+    }
+
+    .section-kicker {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: clamp(29px, 4vw, 42px);
+      line-height: 1.18;
+      letter-spacing: -1.4px;
+      margin-bottom: 12px;
+    }
+
+    .section-description {
+      color: var(--muted);
+      max-width: 610px;
+      margin-bottom: 0;
+    }
+
+    .course-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 19px;
+    }
+
+    .course-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 310px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 23px;
+      transition: transform .2s, border-color .2s;
+    }
+
+    .course-card:hover {
+      transform: translateY(-5px);
+      border-color: #537e7a;
+    }
+
+    .course-icon {
+      width: 50px;
+      height: 50px;
+      display: grid;
+      place-items: center;
+      font-size: 23px;
+      border-radius: 15px;
+      margin-bottom: 20px;
+      background: #203e3b;
+    }
+
+    .course-icon.blue { background: #233451; }
+    .course-icon.purple { background: #352a4c; }
+
+    .course-meta {
+      display: flex;
+      gap: 9px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .tag {
+      padding: 4px 8px;
+      border-radius: 7px;
+      font-size: 10px;
+      font-weight: 750;
+      color: var(--muted);
+      background: #202b40;
+    }
+
+    .course-card h3 { font-size: 20px; margin-bottom: 9px; }
+    .course-card p { color: var(--muted); font-size: 13px; }
+
+    .course-bottom {
+      margin-top: auto;
+      padding-top: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .text-link {
+      color: var(--accent);
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .text-link:hover { text-decoration: underline; }
+
+    .empty-note {
+      margin-top: 22px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .feature-section {
+      background: #0e1526;
+      border-top: 1px solid #1c2940;
+      border-bottom: 1px solid #1c2940;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 26px;
+      margin-top: 35px;
+    }
+
+    .feature {
+      padding: 10px 0;
+    }
+
+    .feature-icon {
+      width: 46px;
+      height: 46px;
+      border: 1px solid var(--border);
+      background: var(--panel);
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      font-size: 21px;
+      margin-bottom: 17px;
+    }
+
+    .feature h3 { font-size: 17px; margin-bottom: 8px; }
+    .feature p { color: var(--muted); font-size: 13px; }
+
+    .certificate-panel {
+      display: grid;
+      grid-template-columns: 1fr .8fr;
+      gap: 45px;
+      align-items: center;
+      padding: 42px;
+      border: 1px solid #31534f;
+      border-radius: 26px;
+      background:
+        radial-gradient(ellipse at 100% 0%, rgba(113,224,192,.10), transparent 45%),
+        var(--panel);
+    }
+
+    .certificate-visual {
+      padding: 23px;
+      background: #f0f4ef;
+      color: #17243a;
+      border-radius: 9px;
+      box-shadow: 0 20px 50px rgba(0,0,0,.22);
+      transform: rotate(1deg);
+    }
+
+    .certificate-border {
+      border: 2px solid #91b6a8;
+      padding: 25px 18px;
+      text-align: center;
+    }
+
+    .certificate-brand {
+      color: #246c5c;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+
+    .certificate-visual h3 {
+      font-family: Georgia, serif;
+      font-size: 26px;
+      margin: 17px 0 8px;
+    }
+
+    .certificate-visual p {
+      color: #5b6873;
+      font-size: 11px;
+      margin-bottom: 12px;
+    }
+
+    .certificate-line {
+      height: 1px;
+      width: 65%;
+      background: #a6b9b1;
+      margin: 17px auto 8px;
+    }
+
+    .certificate-visual small { font-size: 9px; color: #64736c; }
+
+    .cta {
+      text-align: center;
+      padding: 65px 25px;
+      border: 1px solid var(--border);
+      border-radius: 25px;
+      background: linear-gradient(130deg, #17253a, #111a2c);
+    }
+
+    .cta p {
+      max-width: 600px;
+      margin: 0 auto 24px;
+      color: var(--muted);
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 35px 0 25px;
+      color: var(--muted);
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      gap: 35px;
+      padding-bottom: 28px;
+    }
+
+    .footer-description {
+      max-width: 360px;
+      font-size: 12px;
+      margin-top: 12px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      font-size: 12px;
+    }
+
+    .footer-links a:hover { color: var(--accent); }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 18px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      font-size: 11px;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 4px;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr .8fr; gap: 30px; }
+      .course-grid { grid-template-columns: repeat(2, 1fr); }
+      .certificate-panel { gap: 25px; padding: 28px; }
+      .nav-links { gap: 15px; }
+    }
+
+    @media (max-width: 700px) {
+      .container { width: min(100% - 30px, var(--max)); }
+      .nav { min-height: 68px; }
+      .menu-toggle { display: inline-block; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 68px;
+        left: 0;
+        right: 0;
+        padding: 18px 20px 22px;
+        background: var(--bg);
+        border-bottom: 1px solid var(--border);
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links .btn { width: 100%; }
+      .hero { padding: 65px 0 55px; }
+      .hero-grid { grid-template-columns: 1fr; }
+      h1 { letter-spacing: -2px; }
+      .learning-card { max-width: 480px; transform: none; }
+      section { padding: 58px 0; }
+      .section-head { align-items: start; flex-direction: column; }
+      .course-grid { grid-template-columns: 1fr; }
+      .feature-grid { grid-template-columns: 1fr; gap: 15px; }
+      .certificate-panel { grid-template-columns: 1fr; }
+      .certificate-visual { max-width: 430px; margin: auto; }
+      .footer-top { flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a class="brand" href="#home" aria-label="The27LINKS Skills Portal home">
+        <span class="brand-mark">27</span>
+        <span>
+          The27LINKS
+          <small>SKILLS PORTAL</small>
+        </span>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle"
+              aria-expanded="false" aria-controls="navLinks"
+              aria-label="Toggle navigation">☰</button>
+
+      <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+        <a href="#courses">Courses</a>
+        <a href="#benefits">Why Learn Here?</a>
+        <a href="#certificates">Certificates</a>
+        <a href="https://the27links.in/" target="_blank" rel="noopener">Main Website ↗</a>
+        <a class="btn btn-primary" href="#courses">Explore Courses</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow"><span></span> LEARN · PRACTISE · GROW</div>
+
+          <h1>
+            Build skills for a
+            <span class="gradient-text">digital future.</span>
+          </h1>
+
+          <p class="hero-copy">
+            Welcome to The27LINKS Skills Portal — a learning platform
+            for exploring technology, developing practical skills and
+            working towards course completion certificates.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#courses">Explore courses <span>→</span></a>
+            <a class="btn btn-secondary" href="#certificates">Certificate information</a>
+          </div>
+
+          <p class="hero-note">
+            Learn at your own pace. Build knowledge one skill at a time.
+          </p>
+        </div>
+
+        <aside class="learning-card" aria-label="Learning portal preview">
+          <div class="learning-card-top">
+            <span class="small-label">Your learning journey</span>
+            <span class="status">SKILLS FIRST</span>
+          </div>
+
+          <div class="preview-icon" aria-hidden="true">⌘</div>
+          <h3>Learn something new.</h3>
+          <p>
+            Explore structured lessons, practise concepts and track
+            your progress as you learn.
+          </p>
+
+          <div class="progress-row">
+            <span>Progress tracking</span>
+            <span>Course-based</span>
+          </div>
+          <div class="progress"><span></span></div>
+
+          <div class="mini-stats">
+            <div class="mini-stat"><strong>Learn</strong><small>New skills</small></div>
+            <div class="mini-stat"><strong>Build</strong><small>Practical work</small></div>
+            <div class="mini-stat"><strong>Grow</strong><small>Your knowledge</small></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="courses">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Explore and learn</div>
+            <h2>Courses to get you started.</h2>
+            <p class="section-description">
+              Discover foundational digital skills and technology topics.
+              New courses can be introduced as the portal grows.
+            </p>
+          </div>
+        </div>
+
+        <div class="course-grid">
+          <article class="course-card">
+            <div class="course-icon" aria-hidden="true">🌐</div>
+            <div class="course-meta">
+              <span class="tag">WEB DEVELOPMENT</span>
+              <span class="tag">BEGINNER</span>
+            </div>
+            <h3>HTML Fundamentals</h3>
+            <p>
+              Learn the structure of web pages, common HTML elements,
+              links, images, forms and semantic markup.
+            </p>
+            <div class="course-bottom">
+              <span>Online learning</span>
+              <a class="text-link" href="#get-started">Coming soon ↗</a>
+            </div>
+          </article>
+
+          <article class="course-card">
+            <div class="course-icon blue" aria-hidden="true">🐍</div>
+            <div class="course-meta">
+              <span class="tag">PROGRAMMING</span>
+              <span class="tag">BEGINNER</span>
+            </div>
+            <h3>Python Programming</h3>
+            <p>
+              Explore variables, data types, conditions, loops,
+              functions and introductory programming exercises.
+            </p>
+            <div class="course-bottom">
+              <span>Online learning</span>
+              <a class="text-link" href="#get-started">Coming soon ↗</a>
+            </div>
+          </article>
+
+          <article class="course-card">
+            <div class="course-icon purple" aria-hidden="true">🧠</div>
+            <div class="course-meta">
+              <span class="tag">TECHNOLOGY</span>
+              <span class="tag">FOUNDATIONS</span>
+            </div>
+            <h3>Digital Skills</h3>
+            <p>
+              Develop useful digital foundations, explore online tools
+              and strengthen your confidence with technology.
+            </p>
+            <div class="course-bottom">
+              <span>Online learning</span>
+              <a class="text-link" href="#get-started">Coming soon ↗</a>
+            </div>
+          </article>
+        </div>
+
+        <p class="empty-note">
+          These are sample course listings. Replace them with your actual
+          published courses before accepting student enrolments.
+        </p>
+      </div>
+    </section>
+
+    <section class="feature-section" id="benefits">
+      <div class="container">
+        <div class="section-kicker">A practical approach</div>
+        <h2>Learning designed around progress.</h2>
+        <p class="section-description">
+          The portal can bring course material, learner progress and
+          certificate information together in one place.
+        </p>
+
+        <div class="feature-grid">
+          <article class="feature">
+            <div class="feature-icon" aria-hidden="true">📚</div>
+            <h3>Structured learning</h3>
+            <p>
+              Organise each course into modules, lessons, exercises
+              and assessments for a clearer learning path.
+            </p>
+          </article>
+
+          <article class="feature">
+            <div class="feature-icon" aria-hidden="true">💻</div>
+            <h3>Practical knowledge</h3>
+            <p>
+              Build understanding through examples, practice tasks
+              and projects that reinforce course concepts.
+            </p>
+          </article>
+
+          <article class="feature">
+            <div class="feature-icon" aria-hidden="true">✓</div>
+            <h3>Certificate verification</h3>
+            <p>
+              Provide a way to verify certificates issued by the portal
+              once the certificate system is connected and operational.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="certificates">
+      <div class="container">
+        <div class="certificate-panel">
+          <div>
+            <div class="section-kicker">Show what you've learned</div>
+            <h2>Learning achievements that can be verified.</h2>
+            <p class="section-description" style="margin-bottom: 23px;">
+              After completing an eligible course and meeting its
+              assessment requirements, learners may be able to receive
+              a certificate issued by The27LINKS.
+            </p>
+            <a class="btn btn-primary" href="#get-started">
+              Certificate details <span>→</span>
+            </a>
+          </div>
+
+          <div class="certificate-visual" aria-label="Illustrative certificate preview">
+            <div class="certificate-border">
+              <div class="certificate-brand">THE27LINKS</div>
+              <h3>Certificate of Completion</h3>
+              <p>This is an illustrative preview</p>
+              <p>Presented to</p>
+              <strong>Learner Name</strong>
+              <div class="certificate-line"></div>
+              <p>For completing an eligible course</p>
+              <small>Certificate number: SAMPLE-PREVIEW</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="get-started">
+      <div class="container">
+        <div class="cta">
+          <div class="section-kicker">Start your learning journey</div>
+          <h2>Make your next skill count.</h2>
+          <p>
+            Explore the courses as they become available and check back
+            for new learning opportunities from The27LINKS Skills Portal.
+          </p>
+          <a class="btn btn-primary" href="#courses">Browse course topics →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+        <div>
+          <a class="brand" href="#home">
+            <span class="brand-mark">27</span>
+            <span>
+              The27LINKS
+              <small>SKILLS PORTAL</small>
+            </span>
+          </a>
+          <p class="footer-description">
+            An online learning initiative by The27LINKS, focused on
+            accessible digital learning and technology skills.
+          </p>
+        </div>
+
+        <nav class="footer-links" aria-label="Footer navigation">
+          <a href="#courses">Courses</a>
+          <a href="#certificates">Certificates</a>
+          <a href="https://the27links.in/privacy-policy">Privacy Policy</a>
+          <a href="https://the27links.in/terms">Terms of Use</a>
+          <a href="https://the27links.in/contact.html">Contact</a>
+        </nav>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> The27LINKS. All rights reserved.</span>
+        <span>Skills Portal · Operated by The27LINKS</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      menuToggle.setAttribute("aria-label",
+        isOpen ? "Close navigation" : "Toggle navigation");
+      menuToggle.textContent = isOpen ? "✕" : "☰";
+    });
+
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Toggle navigation");
+        menuToggle.textContent = "☰";
+      });
+    });
+
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+  </script>
+</body>
+</html>
