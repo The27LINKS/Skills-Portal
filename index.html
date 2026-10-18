@@ -11,6 +11,7 @@
   <title>Skills Portal | The27LINKS</title>
   <link rel="canonical" href="https://skills.the27links.in/">
   <link rel="icon" href="https://the27links.in/assets/img/favicon.png" type="image/svg+xml">
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
 
   <meta property="og:title" content="The27LINKS Skills Portal">
   <meta property="og:description" content="Practical technology learning for your next step.">
@@ -30,8 +31,25 @@ a{color:inherit;text-decoration:none}
 @keyframes flow{to{background-position:200% center}}
 header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;backdrop-filter:blur(14px);background:color-mix(in srgb,var(--bg) 82%,transparent);border-bottom:1px solid var(--line)}
 .nav{display:flex;align-items:center;justify-content:space-between;height:68px;gap:12px}
-.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.15rem;letter-spacing:-.02em}
-.logo i{width:36px;height:36px;border-radius:11px;background:linear-gradient(135deg,var(--a),var(--b));display:grid;place-items:center;color:#fff;font-style:normal;font-size:.85rem;box-shadow:0 6px 16px rgba(91,75,255,.4)}
+.logo{    display: block;
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;}
+  .logo img {
+    display: block;
+    width: 30px;
+    height: auto;
+    object-fit: contain;
+    background: transparent;
+  }
+.logo p {
+  font-family: 'Abril Fatface', serif;
+  font-size: 30px;
+  font-weight: 400;
+  color: #F59E0B;
+  margin-left: 15px;
+  letter-spacing: 1px;
+}
 nav ul{display:flex;gap:6px;list-style:none;margin:0;padding:0}
 nav a{padding:8px 13px;border-radius:10px;color:var(--muted);font-weight:500;font-size:.95rem;transition:.2s}
 nav a:hover{color:var(--text);background:var(--surface2)}
@@ -173,7 +191,10 @@ nav.open{max-height:360px}nav ul{flex-direction:column;padding:10px 20px 16px}
 </div>
 <div id="prog"></div>
 <header><div class="wrap nav">
-<a href="#home" class="logo"><i>27</i><span>The27LINKS</span></a>
+<a href="#" class="logo">
+  <img src="https://the27links.in/assets/img/favicon.png" alt="The27LINKS"><p>The27LINKS</p>
+</a>
+
 <nav id="nav"><ul>
 <li><a href="#courses">Courses</a></li><li><a href="#paths">Paths</a></li><li><a href="#how">How it works</a></li><li><a href="#mentors">Mentors</a></li><li><a href="#faq">FAQ</a></li><li><a href="#contact">Contact</a></li></ul></nav>
 <div class="tools">
@@ -260,7 +281,9 @@ nav.open{max-height:360px}nav ul{flex-direction:column;padding:10px 20px 16px}
 
 <footer><div class="wrap">
 <div class="fg">
-<div><a href="#home" class="logo"><i>27</i><span>The27LINKS</span></a><p style="margin-top:12px">Practical skills, real connections. A registered proprietorship firm.</p></div>
+<div>
+<a href="#" class="logo">
+  <img src="https://the27links.in/assets/img/favicon.png" alt="The27LINKS"><span>The27LINKS</span></a><p style="margin-top:12px">Practical skills, real connections. A registered proprietorship firm.</p></div>
 <div><h4>Portal</h4><ul><li><a href="#courses">Courses</a></li><li><a href="#paths">Learning paths</a></li><li><a href="#mentors">Mentors</a></li></ul></div>
 <div><h4>Support</h4><ul><li><a href="#faq">FAQ</a></li><li><a href="mailto:hello@the27links.com">hello@the27links.com</a></li><li><a href="#contact">Newsletter</a></li></ul></div>
 <div><h4>Legal</h4><ul><li><a href="#home">Privacy Policy</a></li><li><a href="#home">Terms of Use</a></li><li><a href="#home">Refund Policy</a></li></ul></div>
