@@ -1,926 +1,333 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
   <meta name="theme-color" content="#0b1020">
+  <meta name="description" content="Explore practical technology courses at The27LINKS Skills Portal. Learn web development, Python, JavaScript, databases and more.">
+  <meta name="robots" content="index, follow">
 
   <title>Skills Portal | The27LINKS</title>
-  <meta name="description" content="Learn practical digital skills with The27LINKS Skills Portal. Explore online courses, build your knowledge and earn certificates.">
-  <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://skills.the27links.in/">
-
-  <style>
-    :root {
-      --bg: #0b1020;
-      --panel: #131b2e;
-      --panel-light: #19243a;
-      --border: #2a3854;
-      --text: #edf3ff;
-      --muted: #a9b6ce;
-      --accent: #71e0c0;
-      --accent-dark: #102d2a;
-      --blue: #86a9ff;
-      --radius: 20px;
-      --max: 1160px;
-    }
-
-    * { box-sizing: border-box; }
-
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: 90px;
-    }
-
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system,
-                   BlinkMacSystemFont, "Segoe UI", sans-serif;
-      line-height: 1.65;
-    }
-
-    a { color: inherit; text-decoration: none; }
-    button, a { -webkit-tap-highlight-color: transparent; }
-    button { font: inherit; }
-
-    .container {
-      width: min(var(--max), calc(100% - 40px));
-      margin-inline: auto;
-    }
-
-    .topbar {
-      border-bottom: 1px solid var(--border);
-      background: rgba(11, 16, 32, .88);
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      backdrop-filter: blur(16px);
-    }
-
-    .nav {
-      min-height: 76px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 19px;
-      font-weight: 800;
-      letter-spacing: -.6px;
-    }
-
-    .brand-mark {
-      width: 42px;
-      height: 42px;
-      border-radius: 14px;
-      display: grid;
-      place-items: center;
-      background: var(--accent);
-      color: #071b19;
-      font-weight: 900;
-      font-size: 17px;
-    }
-
-    .brand small {
-      display: block;
-      color: var(--muted);
-      font-size: 10px;
-      letter-spacing: 2px;
-      font-weight: 700;
-      line-height: 1.4;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 26px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .nav-links a:hover { color: var(--accent); }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
-      padding: 12px 19px;
-      border: 1px solid transparent;
-      border-radius: 12px;
-      font-size: 14px;
-      font-weight: 750;
-      cursor: pointer;
-      transition: transform .2s, background .2s, border-color .2s;
-    }
-
-    .btn:hover { transform: translateY(-2px); }
-
-    .btn-primary {
-      background: var(--accent);
-      color: #071b19;
-    }
-
-    .btn-primary:hover { background: #91f0d5; }
-
-    .btn-secondary {
-      background: transparent;
-      border-color: var(--border);
-      color: var(--text);
-    }
-
-    .btn-secondary:hover { border-color: var(--accent); }
-
-    .menu-toggle {
-      display: none;
-      color: var(--text);
-      border: 1px solid var(--border);
-      background: var(--panel);
-      border-radius: 10px;
-      padding: 8px 12px;
-      cursor: pointer;
-    }
-
-    .hero {
-      padding: 94px 0 78px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      width: 500px;
-      height: 500px;
-      right: -200px;
-      top: -160px;
-      background: radial-gradient(circle, rgba(113,224,192,.12), transparent 68%);
-      pointer-events: none;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap: 65px;
-      align-items: center;
-      position: relative;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      padding: 7px 12px;
-      border: 1px solid #31534f;
-      border-radius: 999px;
-      color: var(--accent);
-      font-size: 12px;
-      font-weight: 750;
-      letter-spacing: .4px;
-      background: rgba(113,224,192,.06);
-    }
-
-    .eyebrow span {
-      width: 7px;
-      height: 7px;
-      background: var(--accent);
-      border-radius: 50%;
-    }
-
-    h1, h2, h3, p { margin-top: 0; }
-
-    h1 {
-      font-size: clamp(42px, 5.4vw, 68px);
-      letter-spacing: -3px;
-      line-height: 1.08;
-      margin: 25px 0;
-      max-width: 700px;
-    }
-
-    .gradient-text {
-      color: var(--accent);
-    }
-
-    .hero-copy {
-      color: var(--muted);
-      font-size: 17px;
-      max-width: 560px;
-      margin-bottom: 29px;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .hero-note {
-      margin-top: 24px;
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .learning-card {
-      padding: 25px;
-      background: linear-gradient(145deg, #17243b, #10192b);
-      border: 1px solid var(--border);
-      border-radius: 25px;
-      box-shadow: 0 30px 80px rgba(0,0,0,.2);
-      transform: rotate(1deg);
-    }
-
-    .learning-card-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 25px;
-    }
-
-    .small-label {
-      font-size: 11px;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 1.4px;
-      font-weight: 800;
-    }
-
-    .status {
-      font-size: 11px;
-      color: var(--accent);
-      background: rgba(113,224,192,.1);
-      padding: 6px 9px;
-      border-radius: 8px;
-    }
-
-    .preview-icon {
-      width: 62px;
-      height: 62px;
-      display: grid;
-      place-items: center;
-      font-size: 29px;
-      background: #203a4b;
-      border: 1px solid #355768;
-      border-radius: 17px;
-      margin-bottom: 19px;
-    }
-
-    .learning-card h3 { font-size: 23px; margin-bottom: 7px; }
-    .learning-card p { color: var(--muted); font-size: 13px; }
-
-    .progress-row {
-      display: flex;
-      justify-content: space-between;
-      font-size: 12px;
-      color: var(--muted);
-      margin: 22px 0 9px;
-    }
-
-    .progress {
-      height: 7px;
-      border-radius: 20px;
-      background: #29364e;
-      overflow: hidden;
-    }
-
-    .progress span {
-      display: block;
-      width: 72%;
-      height: 100%;
-      background: var(--accent);
-      border-radius: inherit;
-    }
-
-    .mini-stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-top: 25px;
-    }
-
-    .mini-stat {
-      background: rgba(255,255,255,.035);
-      border: 1px solid var(--border);
-      padding: 12px 8px;
-      text-align: center;
-      border-radius: 12px;
-    }
-
-    .mini-stat strong { display: block; font-size: 18px; }
-    .mini-stat small { color: var(--muted); font-size: 10px; }
-
-    section { padding: 78px 0; }
-
-    .section-head {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 25px;
-      margin-bottom: 30px;
-    }
-
-    .section-kicker {
-      color: var(--accent);
-      font-size: 12px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-bottom: 10px;
-    }
-
-    h2 {
-      font-size: clamp(29px, 4vw, 42px);
-      line-height: 1.18;
-      letter-spacing: -1.4px;
-      margin-bottom: 12px;
-    }
-
-    .section-description {
-      color: var(--muted);
-      max-width: 610px;
-      margin-bottom: 0;
-    }
-
-    .course-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 19px;
-    }
-
-    .course-card {
-      display: flex;
-      flex-direction: column;
-      min-height: 310px;
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 23px;
-      transition: transform .2s, border-color .2s;
-    }
-
-    .course-card:hover {
-      transform: translateY(-5px);
-      border-color: #537e7a;
-    }
-
-    .course-icon {
-      width: 50px;
-      height: 50px;
-      display: grid;
-      place-items: center;
-      font-size: 23px;
-      border-radius: 15px;
-      margin-bottom: 20px;
-      background: #203e3b;
-    }
-
-    .course-icon.blue { background: #233451; }
-    .course-icon.purple { background: #352a4c; }
-
-    .course-meta {
-      display: flex;
-      gap: 9px;
-      flex-wrap: wrap;
-      margin-bottom: 12px;
-    }
-
-    .tag {
-      padding: 4px 8px;
-      border-radius: 7px;
-      font-size: 10px;
-      font-weight: 750;
-      color: var(--muted);
-      background: #202b40;
-    }
-
-    .course-card h3 { font-size: 20px; margin-bottom: 9px; }
-    .course-card p { color: var(--muted); font-size: 13px; }
-
-    .course-bottom {
-      margin-top: auto;
-      padding-top: 15px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      border-top: 1px solid var(--border);
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .text-link {
-      color: var(--accent);
-      font-weight: 800;
-      white-space: nowrap;
-    }
-
-    .text-link:hover { text-decoration: underline; }
-
-    .empty-note {
-      margin-top: 22px;
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .feature-section {
-      background: #0e1526;
-      border-top: 1px solid #1c2940;
-      border-bottom: 1px solid #1c2940;
-    }
-
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 26px;
-      margin-top: 35px;
-    }
-
-    .feature {
-      padding: 10px 0;
-    }
-
-    .feature-icon {
-      width: 46px;
-      height: 46px;
-      border: 1px solid var(--border);
-      background: var(--panel);
-      border-radius: 14px;
-      display: grid;
-      place-items: center;
-      font-size: 21px;
-      margin-bottom: 17px;
-    }
-
-    .feature h3 { font-size: 17px; margin-bottom: 8px; }
-    .feature p { color: var(--muted); font-size: 13px; }
-
-    .certificate-panel {
-      display: grid;
-      grid-template-columns: 1fr .8fr;
-      gap: 45px;
-      align-items: center;
-      padding: 42px;
-      border: 1px solid #31534f;
-      border-radius: 26px;
-      background:
-        radial-gradient(ellipse at 100% 0%, rgba(113,224,192,.10), transparent 45%),
-        var(--panel);
-    }
-
-    .certificate-visual {
-      padding: 23px;
-      background: #f0f4ef;
-      color: #17243a;
-      border-radius: 9px;
-      box-shadow: 0 20px 50px rgba(0,0,0,.22);
-      transform: rotate(1deg);
-    }
-
-    .certificate-border {
-      border: 2px solid #91b6a8;
-      padding: 25px 18px;
-      text-align: center;
-    }
-
-    .certificate-brand {
-      color: #246c5c;
-      font-size: 10px;
-      font-weight: 900;
-      letter-spacing: 2px;
-    }
-
-    .certificate-visual h3 {
-      font-family: Georgia, serif;
-      font-size: 26px;
-      margin: 17px 0 8px;
-    }
-
-    .certificate-visual p {
-      color: #5b6873;
-      font-size: 11px;
-      margin-bottom: 12px;
-    }
-
-    .certificate-line {
-      height: 1px;
-      width: 65%;
-      background: #a6b9b1;
-      margin: 17px auto 8px;
-    }
-
-    .certificate-visual small { font-size: 9px; color: #64736c; }
-
-    .cta {
-      text-align: center;
-      padding: 65px 25px;
-      border: 1px solid var(--border);
-      border-radius: 25px;
-      background: linear-gradient(130deg, #17253a, #111a2c);
-    }
-
-    .cta p {
-      max-width: 600px;
-      margin: 0 auto 24px;
-      color: var(--muted);
-    }
-
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 35px 0 25px;
-      color: var(--muted);
-    }
-
-    .footer-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: start;
-      gap: 35px;
-      padding-bottom: 28px;
-    }
-
-    .footer-description {
-      max-width: 360px;
-      font-size: 12px;
-      margin-top: 12px;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 18px;
-      flex-wrap: wrap;
-      font-size: 12px;
-    }
-
-    .footer-links a:hover { color: var(--accent); }
-
-    .footer-bottom {
-      border-top: 1px solid var(--border);
-      padding-top: 18px;
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      flex-wrap: wrap;
-      font-size: 11px;
-    }
-
-    :focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 4px;
-    }
-
-    @media (max-width: 900px) {
-      .hero-grid { grid-template-columns: 1fr .8fr; gap: 30px; }
-      .course-grid { grid-template-columns: repeat(2, 1fr); }
-      .certificate-panel { gap: 25px; padding: 28px; }
-      .nav-links { gap: 15px; }
-    }
-
-    @media (max-width: 700px) {
-      .container { width: min(100% - 30px, var(--max)); }
-      .nav { min-height: 68px; }
-      .menu-toggle { display: inline-block; }
-      .nav-links {
-        display: none;
-        position: absolute;
-        top: 68px;
-        left: 0;
-        right: 0;
-        padding: 18px 20px 22px;
-        background: var(--bg);
-        border-bottom: 1px solid var(--border);
-        flex-direction: column;
-        align-items: stretch;
-        gap: 16px;
-      }
-      .nav-links.open { display: flex; }
-      .nav-links .btn { width: 100%; }
-      .hero { padding: 65px 0 55px; }
-      .hero-grid { grid-template-columns: 1fr; }
-      h1 { letter-spacing: -2px; }
-      .learning-card { max-width: 480px; transform: none; }
-      section { padding: 58px 0; }
-      .section-head { align-items: start; flex-direction: column; }
-      .course-grid { grid-template-columns: 1fr; }
-      .feature-grid { grid-template-columns: 1fr; gap: 15px; }
-      .certificate-panel { grid-template-columns: 1fr; }
-      .certificate-visual { max-width: 430px; margin: auto; }
-      .footer-top { flex-direction: column; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      *, *::before, *::after {
-        transition-duration: .01ms !important;
-        animation-duration: .01ms !important;
-      }
-    }
-  </style>
+  <link rel="icon" href="https://the27links.in/assets/img/favicon.png" type="image/svg+xml">
+
+  <meta property="og:title" content="The27LINKS Skills Portal">
+  <meta property="og:description" content="Practical technology learning for your next step.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://skills.the27links.in/">
+<style>
+:root{--bg:#f6f7fb;--surface:#fff;--surface2:#eef0f8;--text:#12142b;--muted:#5b6080;--line:#dfe2f0;--a:#5b4bff;--b:#00b8d9;--c:#ff5c8a;--shadow:0 10px 30px rgba(40,40,120,.10);--r:18px;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b0d1a;--surface:#141730;--surface2:#1b1f3d;--text:#eef0ff;--muted:#9aa0c7;--line:#262b52;--shadow:0 10px 30px rgba(0,0,0,.45);color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0b0d1a;--surface:#141730;--surface2:#1b1f3d;--text:#eef0ff;--muted:#9aa0c7;--line:#262b52;--shadow:0 10px 30px rgba(0,0,0,.45);color-scheme:dark}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:calc(76px + env(safe-area-inset-top,0px))}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;overflow-x:hidden;transition:background .3s,color .3s}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:60}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+.grad{background:linear-gradient(120deg,var(--a),var(--b) 55%,var(--c));-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200% auto;animation:flow 6s linear infinite}
+@keyframes flow{to{background-position:200% center}}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;backdrop-filter:blur(14px);background:color-mix(in srgb,var(--bg) 82%,transparent);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:68px;gap:12px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.15rem;letter-spacing:-.02em}
+.logo i{width:36px;height:36px;border-radius:11px;background:linear-gradient(135deg,var(--a),var(--b));display:grid;place-items:center;color:#fff;font-style:normal;font-size:.85rem;box-shadow:0 6px 16px rgba(91,75,255,.4)}
+nav ul{display:flex;gap:6px;list-style:none;margin:0;padding:0}
+nav a{padding:8px 13px;border-radius:10px;color:var(--muted);font-weight:500;font-size:.95rem;transition:.2s}
+nav a:hover{color:var(--text);background:var(--surface2)}
+.tools{display:flex;gap:8px;align-items:center}
+.btn{border:0;cursor:pointer;font:inherit;font-weight:600;padding:11px 20px;border-radius:12px;background:linear-gradient(135deg,var(--a),#8a5bff);color:#fff;box-shadow:0 8px 22px rgba(91,75,255,.35);transition:transform .2s,box-shadow .2s;display:inline-block}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(91,75,255,.5)}
+.btn.ghost{background:var(--surface);color:var(--text);box-shadow:none;border:1px solid var(--line)}
+.icon{width:42px;height:42px;padding:0;display:grid;place-items:center;font-size:1.1rem;border-radius:12px;background:var(--surface);border:1px solid var(--line);cursor:pointer;color:var(--text)}
+#menu{display:none}
+.hero{position:relative;padding:84px 0 70px;overflow:hidden;text-align:center}
+.blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.35;z-index:-1;animation:float 12s ease-in-out infinite}
+.blob.one{width:380px;height:380px;background:var(--a);top:-80px;left:-80px}
+.blob.two{width:340px;height:340px;background:var(--b);right:-60px;top:40px;animation-delay:-4s}
+.blob.three{width:260px;height:260px;background:var(--c);bottom:-60px;left:40%;animation-delay:-8s}
+@keyframes float{50%{transform:translate(30px,-30px) scale(1.1)}}
+.pill{display:inline-flex;gap:8px;align-items:center;padding:7px 15px;border:1px solid var(--line);background:var(--surface);border-radius:99px;font-size:.85rem;color:var(--muted);box-shadow:var(--shadow)}
+.dot{width:8px;height:8px;border-radius:50%;background:#22c55e;animation:pulse 1.6s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(34,197,94,.6)}100%{box-shadow:0 0 0 10px transparent}}
+h1{font-size:clamp(2.2rem,6vw,4.4rem);line-height:1.08;letter-spacing:-.035em;margin:22px auto 18px;max-width:900px}
+.lead{max-width:640px;margin:0 auto 30px;color:var(--muted);font-size:1.12rem}
+.search{display:flex;max-width:620px;margin:0 auto 18px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:6px;box-shadow:var(--shadow)}
+.search input{flex:1;min-width:0;border:0;background:none;color:var(--text);font:inherit;padding:10px 14px;outline:0}
+.tags{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;color:var(--muted);font-size:.9rem}
+.tags button{border:1px solid var(--line);background:var(--surface);color:var(--text);padding:5px 12px;border-radius:99px;cursor:pointer;font:inherit;font-size:.85rem}
+.tags button:hover{border-color:var(--a);color:var(--a)}
+section{padding:72px 0}
+.head{text-align:center;margin-bottom:38px}
+.head small{color:var(--a);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:.78rem}
+.head h2{font-size:clamp(1.7rem,4vw,2.6rem);letter-spacing:-.03em;margin:8px 0}
+.head p{color:var(--muted);max-width:580px;margin:0 auto}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:24px;box-shadow:var(--shadow);transition:transform .25s,border-color .25s}
+.card:hover{transform:translateY(-6px);border-color:var(--a)}
+.stat b{display:block;font-size:2.3rem;letter-spacing:-.03em}
+.stat span{color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:28px}
+.chip{border:1px solid var(--line);background:var(--surface);color:var(--text);padding:8px 16px;border-radius:99px;cursor:pointer;font:inherit;font-weight:500;transition:.2s}
+.chip.on,.chip:hover{background:linear-gradient(135deg,var(--a),#8a5bff);color:#fff;border-color:transparent}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:18px}
+.course .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.emo{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;font-size:1.5rem;background:var(--surface2)}
+.lvl{font-size:.75rem;font-weight:700;padding:4px 10px;border-radius:99px;background:var(--surface2);color:var(--a)}
+.course h3{margin:0 0 6px;font-size:1.1rem;letter-spacing:-.01em}
+.course p{margin:0 0 14px;color:var(--muted);font-size:.92rem}
+.meta{display:flex;justify-content:space-between;font-size:.84rem;color:var(--muted);margin-bottom:14px}
+.bar{height:6px;background:var(--surface2);border-radius:9px;overflow:hidden;margin-bottom:16px}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--a),var(--b));border-radius:9px;transition:width 1.2s cubic-bezier(.2,.8,.2,1)}
+.course .btn{width:100%;text-align:center;padding:10px}
+.empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:30px}
+.paths{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+.step{display:flex;gap:12px;align-items:center;margin-top:10px;font-size:.93rem;color:var(--muted)}
+.step b{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--surface2);color:var(--a);font-size:.8rem;flex:none}
+.how{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;counter-reset:s}
+.how .card::before{counter-increment:s;content:"0" counter(s);font-weight:800;font-size:2rem;color:var(--a);opacity:.5}
+.how h3{margin:4px 0 6px}.how p{margin:0;color:var(--muted)}
+.mentors{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.av{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:800;font-size:1.3rem;margin-bottom:12px;background:linear-gradient(135deg,var(--a),var(--c))}
+.mentors h3{margin:0}.mentors p{margin:2px 0 0;color:var(--muted);font-size:.9rem}
+.quote{position:relative;overflow:hidden;min-height:170px;text-align:center}
+.slide{position:absolute;inset:0;padding:10px 24px;display:flex;flex-direction:column;justify-content:center;opacity:0;transform:translateX(30px);transition:.6s}
+.slide.on{opacity:1;transform:none}
+.slide p{font-size:1.15rem;margin:0 0 10px}.slide span{color:var(--muted);font-size:.9rem}
+.dots{display:flex;gap:8px;justify-content:center;margin-top:16px}
+.dots button{width:10px;height:10px;border-radius:50%;border:0;background:var(--line);cursor:pointer;padding:0}
+.dots button.on{background:var(--a);width:26px;border-radius:9px}
+.faq{max-width:760px;margin:0 auto}
+details{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin-bottom:12px;transition:border-color .2s}
+details[open]{border-color:var(--a)}
+summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between}
+summary::after{content:"+";color:var(--a);font-size:1.3rem;line-height:1}
+details[open] summary::after{content:"–"}
+details p{color:var(--muted);margin:10px 0 0}
+.cta{text-align:center;padding:54px 24px;border-radius:28px;color:#fff;background:linear-gradient(135deg,var(--a),#8a5bff 55%,var(--b));box-shadow:0 20px 50px rgba(91,75,255,.35)}
+.cta h2{font-size:clamp(1.6rem,4vw,2.4rem);margin:0 0 10px;letter-spacing:-.02em}
+.cta p{margin:0 auto 22px;max-width:520px;opacity:.92}
+.news{display:flex;gap:8px;max-width:460px;margin:0 auto;flex-wrap:wrap;justify-content:center}
+.news input{flex:1;min-width:200px;padding:13px 16px;border-radius:12px;border:0;font:inherit;outline:0}
+.cta .btn{background:#12142b;box-shadow:none}
+footer{border-top:1px solid var(--line);padding:50px 0 30px;margin-top:40px;background:var(--surface)}
+.fg{display:grid;grid-template-columns:1.6fr repeat(3,1fr);gap:30px}
+footer h4{margin:0 0 12px}footer ul{list-style:none;padding:0;margin:0}
+footer li{margin-bottom:8px}footer li a,footer p{color:var(--muted);font-size:.92rem}
+footer li a:hover{color:var(--a)}
+.legal{margin-top:34px;padding-top:20px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;color:var(--muted);font-size:.85rem}
+#top{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));opacity:0;pointer-events:none;transition:.3s;z-index:40;background:var(--a);color:#fff;border:0}
+#top.show{opacity:1;pointer-events:auto}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,120px);background:#12142b;color:#fff;padding:13px 22px;border-radius:14px;transition:.4s;z-index:70;max-width:90%;text-align:center}
+.toast.show{transform:translate(-50%,0)}
+.rv{opacity:0;transform:translateY(40px);transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1)}
+.rv.l{transform:translateX(-60px)}.rv.r{transform:translateX(60px)}.rv.z{transform:scale(.86) translateY(24px)}
+.rv.in{opacity:1;transform:none}
+.rv.in.done{transition:transform .25s,border-color .25s;transition-delay:0s!important}
+#prog{position:fixed;left:0;right:0;top:env(safe-area-inset-top,0px);height:3px;z-index:65;background:linear-gradient(90deg,var(--a),var(--b),var(--c));transform:scaleX(0);transform-origin:0 50%}
+header{transition:box-shadow .3s}.nav{transition:height .3s}header.sc{box-shadow:var(--shadow)}header.sc .nav{height:58px}header.sc nav{top:58px}
+nav a.act{color:var(--a);background:var(--surface2)}
+@keyframes up{from{opacity:0;transform:translateY(32px)}}
+.hero .pill{animation:up .8s both}.hero h1{animation:up .9s .15s both}.hero .lead{animation:up .9s .3s both}.hero .search{animation:up .9s .45s both}.hero .tags{animation:up .9s .6s both}
+.blob.one{translate:0 calc(var(--py,0)*-.25px)}.blob.two{translate:0 calc(var(--py,0)*.2px)}.blob.three{translate:0 calc(var(--py,0)*-.35px)}
+.fl{position:absolute;font-size:2.2rem;pointer-events:none;animation:bob 5s ease-in-out infinite;filter:drop-shadow(0 8px 12px rgba(0,0,0,.2))}
+@keyframes bob{50%{transform:translateY(-22px) rotate(8deg)}}
+.search{transition:box-shadow .3s}.search:focus-within{box-shadow:0 0 0 4px rgba(91,75,255,.25)}
+.marq{overflow:hidden;padding:16px 0;border-block:1px solid var(--line);background:var(--surface)}
+.marq div{display:flex;gap:44px;width:max-content;animation:mq 32s linear infinite}.marq:hover div{animation-play-state:paused}
+.marq span{white-space:nowrap;font-weight:700;color:var(--muted)}
+@keyframes mq{to{transform:translateX(-50%)}}
+.card{position:relative}
+.card::after{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(139,91,255,.18),transparent 60%);opacity:0;transition:opacity .3s;pointer-events:none}
+.card:hover::after{opacity:1}
+.course{animation:pop .7s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:calc(var(--i,0)*70ms)}
+@keyframes pop{from{opacity:0;transform:translateY(40px) scale(.9) rotate(-1.5deg)}}
+.course:hover .emo{animation:wig .7s}
+@keyframes wig{25%{transform:rotate(-14deg) scale(1.18)}75%{transform:rotate(10deg) scale(1.18)}}
+.btn{position:relative;overflow:hidden}
+.btn::after{content:"";position:absolute;top:0;left:-70%;width:50%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);transform:skewX(-20deg);transition:left .7s}
+.btn:hover::after{left:140%}.btn:active{transform:scale(.96)}
+.head h2::after{content:"";display:block;height:4px;width:0;margin:12px auto 0;border-radius:4px;background:linear-gradient(90deg,var(--a),var(--b));transition:width .9s .3s}
+.head.in h2::after{width:72px}
+.rv .step{opacity:0;transform:translateX(-18px);transition:.6s}.rv.in .step{opacity:1;transform:none}
+.step:nth-child(2){transition-delay:.25s}.step:nth-child(3){transition-delay:.4s}.step:nth-child(4){transition-delay:.55s}.step:nth-child(5){transition-delay:.7s}
+.av{position:relative}
+.av::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:2px solid var(--a);opacity:0;animation:ring 2.4s infinite}
+@keyframes ring{0%{transform:scale(.9);opacity:.7}100%{transform:scale(1.35);opacity:0}}
+.cta{background-size:220% 220%;animation:flow2 9s ease infinite}
+@keyframes flow2{50%{background-position:100% 50%}}
+.logo i{transition:transform .5s}.logo:hover i{transform:rotate(360deg) scale(1.1)}
+@media (max-width:860px){.fl{display:none}}
+@media (prefers-reduced-motion:reduce){.rv.l,.rv.r,.rv.z{transform:none}.rv .step{opacity:1;transform:none}.head h2::after{width:72px}}
+@media (max-width:860px){
+nav{position:absolute;left:0;right:0;top:68px;background:var(--bg);border-bottom:1px solid var(--line);max-height:0;overflow:hidden;transition:max-height .35s}
+nav.open{max-height:360px}nav ul{flex-direction:column;padding:10px 20px 16px}
+#menu{display:grid}.tools .btn{display:none}.fg{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.fg{grid-template-columns:1fr}.hero{padding-top:56px}section{padding:52px 0}.quote{min-height:230px}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}html{scroll-behavior:auto}}
+</style>
 </head>
-
 <body>
-  <header class="topbar">
-    <div class="container nav">
-      <a class="brand" href="#home" aria-label="The27LINKS Skills Portal home">
-        <span class="brand-mark">27</span>
-        <span>
-          The27LINKS
-          <small>SKILLS PORTAL</small>
-        </span>
-      </a>
+<div id="prog"></div>
+<header><div class="wrap nav">
+<a href="#home" class="logo"><i>27</i><span>The27LINKS</span></a>
+<nav id="nav"><ul>
+<li><a href="#courses">Courses</a></li><li><a href="#paths">Paths</a></li><li><a href="#how">How it works</a></li><li><a href="#mentors">Mentors</a></li><li><a href="#faq">FAQ</a></li><li><a href="#contact">Contact</a></li></ul></nav>
+<div class="tools">
+<button class="icon" id="theme" aria-label="Toggle light or dark theme">🌓</button>
+<a href="#courses" class="btn">Get started</a>
+<button class="icon" id="menu" aria-label="Open menu">☰</button></div>
+</div></header>
 
-      <button class="menu-toggle" id="menuToggle"
-              aria-expanded="false" aria-controls="navLinks"
-              aria-label="Toggle navigation">☰</button>
+<main id="home">
+<div class="hero"><div class="blob one"></div><div class="blob two"></div><div class="blob three"></div>
+<span class="fl" style="left:7%;top:28%">💻</span><span class="fl" style="right:8%;top:22%;animation-delay:-1.5s">🎨</span><span class="fl" style="left:12%;bottom:12%;animation-delay:-3s">📊</span><span class="fl" style="right:13%;bottom:16%;animation-delay:-2s">🚀</span>
+<div class="wrap">
+<span class="pill"><span class="dot"></span> New batches open every month</span>
+<h1>Build skills that <span class="grad">connect you</span> to real careers.</h1>
+<p class="lead">The27LINKS Skills Portal brings practical, mentor-led courses, hands-on projects and verified certificates together, so you learn what employers actually hire for.</p>
+<div class="search"><input id="q" type="search" placeholder="Search skills e.g. Excel, Web, Design…" aria-label="Search skills"><a href="#courses" class="btn" id="go">Search</a></div>
+<div class="tags">Popular: <button data-q="Web">Web</button><button data-q="Data">Data</button><button data-q="Design">Design</button><button data-q="Marketing">Marketing</button></div>
+</div></div>
 
-      <nav class="nav-links" id="navLinks" aria-label="Main navigation">
-        <a href="#courses">Courses</a>
-        <a href="#benefits">Why Learn Here?</a>
-        <a href="#certificates">Certificates</a>
-        <a href="https://the27links.in/" target="_blank" rel="noopener">Main Website ↗</a>
-        <a class="btn btn-primary" href="#courses">Explore Courses</a>
-      </nav>
-    </div>
-  </header>
+<section style="padding:20px 0 40px"><div class="wrap stats">
+<div class="card stat rv"><b data-n="12000" data-s="+">0</b><span>Learners enrolled</span></div>
+<div class="card stat rv"><b data-n="48" data-s="">0</b><span>Practical courses</span></div>
+<div class="card stat rv"><b data-n="35" data-s="+">0</b><span>Industry mentors</span></div>
+<div class="card stat rv"><b data-n="92" data-s="%">0</b><span>Completion satisfaction</span></div>
+</div></section>
 
-  <main>
-    <section class="hero" id="home">
-      <div class="container hero-grid">
-        <div>
-          <div class="eyebrow"><span></span> LEARN · PRACTISE · GROW</div>
+<div class="marq"><div><span>💻 Web Development</span><span>📗 Excel</span><span>🎨 UI/UX Design</span><span>📣 Digital Marketing</span><span>🗄️ SQL</span><span>🐍 Python</span><span>📊 Power BI</span><span>🧾 Accounting</span><span>🗣️ Communication</span></div></div>
 
-          <h1>
-            Build skills for a
-            <span class="gradient-text">digital future.</span>
-          </h1>
+<section id="courses"><div class="wrap">
+<div class="head rv"><small>Course catalogue</small><h2>Pick a skill. Start today.</h2><p>Filter by category or search above. Every course includes projects, mentor support and a certificate.</p></div>
+<div class="chips rv" id="chips"></div>
+<div class="grid" id="grid"></div>
+</div></section>
 
-          <p class="hero-copy">
-            Welcome to The27LINKS Skills Portal — a learning platform
-            for exploring technology, developing practical skills and
-            working towards course completion certificates.
-          </p>
+<section id="paths" style="background:var(--surface2)"><div class="wrap">
+<div class="head rv"><small>Learning paths</small><h2>Follow a roadmap, not a random list</h2><p>Curated sequences that take you from beginner to job-ready.</p></div>
+<div class="paths">
+<div class="card rv"><h3>💼 Digital Business Pro</h3><div class="step"><b>1</b>Digital Marketing Basics</div><div class="step"><b>2</b>Excel for Business</div><div class="step"><b>3</b>GST &amp; Accounting Essentials</div><div class="step"><b>4</b>Client Communication</div></div>
+<div class="card rv"><h3>💻 Full-Stack Developer</h3><div class="step"><b>1</b>HTML, CSS &amp; JavaScript</div><div class="step"><b>2</b>React Fundamentals</div><div class="step"><b>3</b>Node.js &amp; Databases</div><div class="step"><b>4</b>Capstone Project</div></div>
+<div class="card rv"><h3>📊 Data Analyst</h3><div class="step"><b>1</b>Advanced Excel</div><div class="step"><b>2</b>SQL for Beginners</div><div class="step"><b>3</b>Power BI Dashboards</div><div class="step"><b>4</b>Python for Analysis</div></div>
+</div></div></section>
 
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#courses">Explore courses <span>→</span></a>
-            <a class="btn btn-secondary" href="#certificates">Certificate information</a>
-          </div>
+<section id="how"><div class="wrap">
+<div class="head rv"><small>How it works</small><h2>From signup to certificate in 4 steps</h2></div>
+<div class="how">
+<div class="card rv"><h3>Create account</h3><p>Sign up free in under a minute with email or phone.</p></div>
+<div class="card rv"><h3>Choose a course</h3><p>Pick a single skill or a complete learning path.</p></div>
+<div class="card rv"><h3>Learn by doing</h3><p>Live sessions, recorded lessons, projects and quizzes.</p></div>
+<div class="card rv"><h3>Get certified</h3><p>Earn a shareable certificate and get job guidance.</p></div>
+</div></div></section>
 
-          <p class="hero-note">
-            Learn at your own pace. Build knowledge one skill at a time.
-          </p>
-        </div>
+<section id="mentors" style="background:var(--surface2)"><div class="wrap">
+<div class="head rv"><small>Mentors</small><h2>Learn from people who do the work</h2></div>
+<div class="mentors">
+<div class="card rv"><div class="av">AS</div><h3>Aarav Sharma</h3><p>Senior Web Engineer · 9 yrs</p></div>
+<div class="card rv"><div class="av">PM</div><h3>Priya Mehta</h3><p>Data &amp; BI Consultant · 7 yrs</p></div>
+<div class="card rv"><div class="av">RK</div><h3>Rohan Kapoor</h3><p>Growth Marketer · 8 yrs</p></div>
+<div class="card rv"><div class="av">NV</div><h3>Neha Verma</h3><p>UI/UX Designer · 6 yrs</p></div>
+</div></div></section>
 
-        <aside class="learning-card" aria-label="Learning portal preview">
-          <div class="learning-card-top">
-            <span class="small-label">Your learning journey</span>
-            <span class="status">SKILLS FIRST</span>
-          </div>
+<section><div class="wrap">
+<div class="head rv"><small>Success stories</small><h2>Loved by learners</h2></div>
+<div class="card quote rv" id="quote">
+<div class="slide on"><p>“The projects felt like real client work. I landed my first freelance gig before the course ended.”</p><span>Sneha R. · Web Development</span></div>
+<div class="slide"><p>“Mentors replied fast and explained things simply. Excel finally makes sense to me.”</p><span>Vikram T. · Excel for Business</span></div>
+<div class="slide"><p>“My shop now runs ads that actually bring customers. Great practical marketing training.”</p><span>Anita D. · Digital Marketing</span></div>
+</div><div class="dots" id="dots"></div>
+</div></section>
 
-          <div class="preview-icon" aria-hidden="true">⌘</div>
-          <h3>Learn something new.</h3>
-          <p>
-            Explore structured lessons, practise concepts and track
-            your progress as you learn.
-          </p>
+<section id="faq" style="background:var(--surface2)"><div class="wrap">
+<div class="head rv"><small>FAQ</small><h2>Questions, answered</h2></div>
+<div class="faq rv">
+<details><summary>Are the courses beginner friendly?</summary><p>Yes. Each course shows its level, and most start from zero with no prior experience needed.</p></details>
+<details><summary>Will I get a certificate?</summary><p>Every completed course gives a verifiable certificate issued by The27LINKS.</p></details>
+<details><summary>Can I learn on my phone?</summary><p>Absolutely. The portal works on phones, tablets and desktops, and lessons resume where you left off.</p></details>
+<details><summary>How do I pay or get support?</summary><p>UPI, cards and net banking are supported. Write to us anytime and we reply within one business day.</p></details>
+</div></div></section>
 
-          <div class="progress-row">
-            <span>Progress tracking</span>
-            <span>Course-based</span>
-          </div>
-          <div class="progress"><span></span></div>
+<section id="contact"><div class="wrap">
+<div class="cta rv"><h2>Ready to link up with your future?</h2><p>Join our newsletter for new batches, free workshops and scholarship updates.</p>
+<div class="news"><input id="mail" type="email" placeholder="you@example.com" aria-label="Email address"><button class="btn" id="sub">Subscribe</button></div></div>
+</div></section>
+</main>
 
-          <div class="mini-stats">
-            <div class="mini-stat"><strong>Learn</strong><small>New skills</small></div>
-            <div class="mini-stat"><strong>Build</strong><small>Practical work</small></div>
-            <div class="mini-stat"><strong>Grow</strong><small>Your knowledge</small></div>
-          </div>
-        </aside>
-      </div>
-    </section>
+<footer><div class="wrap">
+<div class="fg">
+<div><a href="#home" class="logo"><i>27</i><span>The27LINKS</span></a><p style="margin-top:12px">Practical skills, real connections. A registered proprietorship firm.</p></div>
+<div><h4>Portal</h4><ul><li><a href="#courses">Courses</a></li><li><a href="#paths">Learning paths</a></li><li><a href="#mentors">Mentors</a></li></ul></div>
+<div><h4>Support</h4><ul><li><a href="#faq">FAQ</a></li><li><a href="mailto:hello@the27links.com">hello@the27links.com</a></li><li><a href="#contact">Newsletter</a></li></ul></div>
+<div><h4>Legal</h4><ul><li><a href="#home">Privacy Policy</a></li><li><a href="#home">Terms of Use</a></li><li><a href="#home">Refund Policy</a></li></ul></div>
+</div>
+<div class="legal"><span>© <span id="yr">2026</span> The27LINKS (Registered Proprietorship). All rights reserved.</span><span>Made with ♥ in India</span></div>
+</div></footer>
+<button class="icon" id="top" aria-label="Back to top">↑</button>
+<div class="toast" id="toast" role="status"></div>
 
-    <section id="courses">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <div class="section-kicker">Explore and learn</div>
-            <h2>Courses to get you started.</h2>
-            <p class="section-description">
-              Discover foundational digital skills and technology topics.
-              New courses can be introduced as the portal grows.
-            </p>
-          </div>
-        </div>
-
-        <div class="course-grid">
-          <article class="course-card">
-            <div class="course-icon" aria-hidden="true">🌐</div>
-            <div class="course-meta">
-              <span class="tag">WEB DEVELOPMENT</span>
-              <span class="tag">BEGINNER</span>
-            </div>
-            <h3>HTML Fundamentals</h3>
-            <p>
-              Learn the structure of web pages, common HTML elements,
-              links, images, forms and semantic markup.
-            </p>
-            <div class="course-bottom">
-              <span>Online learning</span>
-              <a class="text-link" href="#get-started">Coming soon ↗</a>
-            </div>
-          </article>
-
-          <article class="course-card">
-            <div class="course-icon blue" aria-hidden="true">🐍</div>
-            <div class="course-meta">
-              <span class="tag">PROGRAMMING</span>
-              <span class="tag">BEGINNER</span>
-            </div>
-            <h3>Python Programming</h3>
-            <p>
-              Explore variables, data types, conditions, loops,
-              functions and introductory programming exercises.
-            </p>
-            <div class="course-bottom">
-              <span>Online learning</span>
-              <a class="text-link" href="#get-started">Coming soon ↗</a>
-            </div>
-          </article>
-
-          <article class="course-card">
-            <div class="course-icon purple" aria-hidden="true">🧠</div>
-            <div class="course-meta">
-              <span class="tag">TECHNOLOGY</span>
-              <span class="tag">FOUNDATIONS</span>
-            </div>
-            <h3>Digital Skills</h3>
-            <p>
-              Develop useful digital foundations, explore online tools
-              and strengthen your confidence with technology.
-            </p>
-            <div class="course-bottom">
-              <span>Online learning</span>
-              <a class="text-link" href="#get-started">Coming soon ↗</a>
-            </div>
-          </article>
-        </div>
-
-        <p class="empty-note">
-          These are sample course listings. Replace them with your actual
-          published courses before accepting student enrolments.
-        </p>
-      </div>
-    </section>
-
-    <section class="feature-section" id="benefits">
-      <div class="container">
-        <div class="section-kicker">A practical approach</div>
-        <h2>Learning designed around progress.</h2>
-        <p class="section-description">
-          The portal can bring course material, learner progress and
-          certificate information together in one place.
-        </p>
-
-        <div class="feature-grid">
-          <article class="feature">
-            <div class="feature-icon" aria-hidden="true">📚</div>
-            <h3>Structured learning</h3>
-            <p>
-              Organise each course into modules, lessons, exercises
-              and assessments for a clearer learning path.
-            </p>
-          </article>
-
-          <article class="feature">
-            <div class="feature-icon" aria-hidden="true">💻</div>
-            <h3>Practical knowledge</h3>
-            <p>
-              Build understanding through examples, practice tasks
-              and projects that reinforce course concepts.
-            </p>
-          </article>
-
-          <article class="feature">
-            <div class="feature-icon" aria-hidden="true">✓</div>
-            <h3>Certificate verification</h3>
-            <p>
-              Provide a way to verify certificates issued by the portal
-              once the certificate system is connected and operational.
-            </p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="certificates">
-      <div class="container">
-        <div class="certificate-panel">
-          <div>
-            <div class="section-kicker">Show what you've learned</div>
-            <h2>Learning achievements that can be verified.</h2>
-            <p class="section-description" style="margin-bottom: 23px;">
-              After completing an eligible course and meeting its
-              assessment requirements, learners may be able to receive
-              a certificate issued by The27LINKS.
-            </p>
-            <a class="btn btn-primary" href="#get-started">
-              Certificate details <span>→</span>
-            </a>
-          </div>
-
-          <div class="certificate-visual" aria-label="Illustrative certificate preview">
-            <div class="certificate-border">
-              <div class="certificate-brand">THE27LINKS</div>
-              <h3>Certificate of Completion</h3>
-              <p>This is an illustrative preview</p>
-              <p>Presented to</p>
-              <strong>Learner Name</strong>
-              <div class="certificate-line"></div>
-              <p>For completing an eligible course</p>
-              <small>Certificate number: SAMPLE-PREVIEW</small>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="get-started">
-      <div class="container">
-        <div class="cta">
-          <div class="section-kicker">Start your learning journey</div>
-          <h2>Make your next skill count.</h2>
-          <p>
-            Explore the courses as they become available and check back
-            for new learning opportunities from The27LINKS Skills Portal.
-          </p>
-          <a class="btn btn-primary" href="#courses">Browse course topics →</a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container">
-      <div class="footer-top">
-        <div>
-          <a class="brand" href="#home">
-            <span class="brand-mark">27</span>
-            <span>
-              The27LINKS
-              <small>SKILLS PORTAL</small>
-            </span>
-          </a>
-          <p class="footer-description">
-            An online learning initiative by The27LINKS, focused on
-            accessible digital learning and technology skills.
-          </p>
-        </div>
-
-        <nav class="footer-links" aria-label="Footer navigation">
-          <a href="#courses">Courses</a>
-          <a href="#certificates">Certificates</a>
-          <a href="https://the27links.in/privacy-policy">Privacy Policy</a>
-          <a href="https://the27links.in/terms">Terms of Use</a>
-          <a href="https://the27links.in/contact.html">Contact</a>
-        </nav>
-      </div>
-
-      <div class="footer-bottom">
-        <span>© <span id="year"></span> The27LINKS. All rights reserved.</span>
-        <span>Skills Portal · Operated by The27LINKS</span>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    const menuToggle = document.getElementById("menuToggle");
-    const navLinks = document.getElementById("navLinks");
-
-    menuToggle.addEventListener("click", () => {
-      const isOpen = navLinks.classList.toggle("open");
-      menuToggle.setAttribute("aria-expanded", String(isOpen));
-      menuToggle.setAttribute("aria-label",
-        isOpen ? "Close navigation" : "Toggle navigation");
-      menuToggle.textContent = isOpen ? "✕" : "☰";
-    });
-
-    navLinks.querySelectorAll("a").forEach(link => {
-      link.addEventListener("click", () => {
-        navLinks.classList.remove("open");
-        menuToggle.setAttribute("aria-expanded", "false");
-        menuToggle.setAttribute("aria-label", "Toggle navigation");
-        menuToggle.textContent = "☰";
-      });
-    });
-
-    document.getElementById("year").textContent =
-      new Date().getFullYear();
-  </script>
+<script>
+const C=[
+["Full-Stack Web Development","Web","💻","Intermediate","Build and deploy modern web apps.","12 weeks",4.8,"1,840"],
+["HTML, CSS &amp; JavaScript","Web","🌐","Beginner","Your first websites from scratch.","6 weeks",4.7,"3,120"],
+["Advanced Excel for Business","Data","📗","Beginner","Formulas, pivots and automation.","4 weeks",4.8,"2,460"],
+["SQL for Beginners","Data","🗄️","Beginner","Query databases with confidence.","5 weeks",4.6,"1,310"],
+["Power BI Dashboards","Data","📊","Intermediate","Turn data into decisions.","6 weeks",4.7,"980"],
+["UI/UX Design Essentials","Design","🎨","Beginner","Design clean, usable interfaces.","8 weeks",4.9,"1,570"],
+["Graphic Design with Canva","Design","🖌️","Beginner","Posters, logos and social media.","3 weeks",4.6,"2,050"],
+["Digital Marketing Basics","Marketing","📣","Beginner","SEO, ads and social growth.","6 weeks",4.7,"2,780"],
+["Social Media Growth","Marketing","📱","Intermediate","Content that builds audiences.","4 weeks",4.5,"1,120"],
+["GST &amp; Accounting Essentials","Business","🧾","Beginner","Practical bookkeeping for MSMEs.","5 weeks",4.7,"890"],
+["Spoken English &amp; Communication","Business","🗣️","Beginner","Speak and write with confidence.","8 weeks",4.8,"3,400"],
+["Python for Analysis","Data","🐍","Intermediate","Automate and analyse with Python.","8 weeks",4.8,"1,260"]];
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+let cat="All",term="";
+const cats=["All",...new Set(C.map(c=>c[1]))];
+$("#chips").innerHTML=cats.map(c=>`<button class="chip${c=="All"?" on":""}" data-c="${c}">${c}</button>`).join("");
+function render(){
+ const list=C.filter(c=>(cat=="All"||c[1]==cat)&&(c[0]+c[1]+c[4]).toLowerCase().includes(term.toLowerCase()));
+ $("#grid").innerHTML=list.length?list.map((c,i)=>`<article class="card course" style="--i:${i}"><div class="top"><div class="emo">${c[2]}</div><span class="lvl">${c[3]}</span></div><h3>${c[0]}</h3><p>${c[4]}</p><div class="meta"><span>⏱ ${c[5]}</span><span>⭐ ${c[6]}</span><span>👥 ${c[7]}</span></div><div class="bar"><i data-w="${Math.round(c[6]*20)}"></i></div><button class="btn" data-e="${c[0]}">Enroll now</button></article>`).join(""):`<p class="empty">No skills found. Try another keyword.</p>`;
+ requestAnimationFrame(()=>setTimeout(()=>$$(".bar i").forEach(b=>b.style.width=b.dataset.w+"%"),50));
+}
+$("#chips").onclick=e=>{const b=e.target.closest(".chip");if(!b)return;cat=b.dataset.c;$$(".chip").forEach(x=>x.classList.toggle("on",x==b));render()};
+$("#q").oninput=e=>{term=e.target.value;render()};
+$("#q").onkeydown=e=>{if(e.key=="Enter")$("#go").click()};
+$$(".tags button").forEach(b=>b.onclick=()=>{$("#q").value=term=b.dataset.q;render();$("#courses").scrollIntoView()});
+$("#grid").onclick=e=>{const b=e.target.closest("[data-e]");if(b)toast("🎉 Enrollment started for "+b.dataset.e.replace(/&amp;/g,"&"))};
+function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("show");clearTimeout(t.h);t.h=setTimeout(()=>t.classList.remove("show"),2800)}
+render();
+// theme
+const root=document.documentElement;
+try{const s=localStorage.getItem("t27-theme");if(s)root.dataset.theme=s}catch(e){}
+$("#theme").onclick=()=>{const dark=root.dataset.theme?root.dataset.theme=="dark":matchMedia("(prefers-color-scheme:dark)").matches;const n=dark?"light":"dark";root.dataset.theme=n;try{localStorage.setItem("t27-theme",n)}catch(e){}};
+// menu
+$("#menu").onclick=()=>$("#nav").classList.toggle("open");
+$$("#nav a").forEach(a=>a.onclick=()=>$("#nav").classList.remove("open"));
+// reveal + counters
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");setTimeout(()=>e.target.classList.add("done"),1600);const n=e.target.querySelector("[data-n]");if(n)count(n);io.unobserve(e.target)}}),{threshold:.15});
+$$(".rv").forEach((el,i)=>{if(el.classList.contains("card"))el.classList.add(["z","l","r"][i%3]);el.style.transitionDelay=(i%4)*90+"ms";io.observe(el)});
+function count(el){const T=+el.dataset.n,s=el.dataset.s,t0=performance.now();(function f(t){const p=Math.min((t-t0)/1400,1);el.textContent=Math.round(T*(1-Math.pow(1-p,3))).toLocaleString("en-IN")+s;if(p<1)requestAnimationFrame(f)})(t0)}
+// testimonials
+const sl=$$(".slide");let k=0,timer;
+$("#dots").innerHTML=sl.map((_,i)=>`<button aria-label="Slide ${i+1}"></button>`).join("");
+const dt=$$("#dots button");
+function show(i){k=i;sl.forEach((s,j)=>s.classList.toggle("on",j==i));dt.forEach((d,j)=>d.classList.toggle("on",j==i))}
+dt.forEach((d,i)=>d.onclick=()=>{show(i);clearInterval(timer);timer=setInterval(()=>show((k+1)%sl.length),5000)});
+show(0);timer=setInterval(()=>show((k+1)%sl.length),5000);
+// newsletter
+$("#sub").onclick=()=>{const v=$("#mail").value.trim();if(/^\S+@\S+\.\S+$/.test(v)){toast("✅ Subscribed! Check your inbox.");$("#mail").value=""}else toast("Please enter a valid email address.")};
+// back to top
+addEventListener("scroll",()=>$("#top").classList.toggle("show",scrollY>600),{passive:true});
+$("#top").onclick=()=>scrollTo({top:0,behavior:"smooth"});
+$("#yr").textContent=new Date().getFullYear();
+const prog=$("#prog"),hd=$("header");let tk=false;
+addEventListener("scroll",()=>{if(tk)return;tk=true;requestAnimationFrame(()=>{const h=document.documentElement,m=h.scrollHeight-innerHeight;prog.style.transform=`scaleX(${m>0?scrollY/m:0})`;h.style.setProperty("--py",scrollY);hd.classList.toggle("sc",scrollY>20);tk=false})},{passive:true});
+const so=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)$$("#nav a").forEach(a=>a.classList.toggle("act",a.getAttribute("href")=="#"+e.target.id))}),{rootMargin:"-45% 0px -50% 0px"});
+$$("main section[id]").forEach(s=>so.observe(s));
+$(".marq div").innerHTML+=$(".marq div").innerHTML;
+let lc=null;
+document.addEventListener("pointermove",e=>{if(e.pointerType!="mouse")return;const c=e.target.closest(".card:not(.quote)");if(lc&&lc!==c)lc.style.transform="";lc=c;if(!c)return;const r=c.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;c.style.setProperty("--mx",x+"px");c.style.setProperty("--my",y+"px");c.style.transform=`perspective(700px) rotateX(${(.5-y/r.height)*8}deg) rotateY(${(x/r.width-.5)*8}deg) translateY(-6px)`});
+</script>
 </body>
 </html>
